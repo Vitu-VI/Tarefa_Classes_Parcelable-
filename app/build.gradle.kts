@@ -6,11 +6,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.tarefaclasses"
+    namespace = "com.example.tarefaparcelable"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.example.tarefaclasses"
+        applicationId = "com.example.tarefaparcelable"
         minSdk = 21
         targetSdk = 35
         versionCode = 1
@@ -53,6 +53,6 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     implementation(libs.kotlinx.serialization.json)
-
+    implementation("com.squareup.okhttp3:okhttp:5.0.0")
 
 }

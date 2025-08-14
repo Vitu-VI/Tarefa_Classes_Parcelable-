@@ -1,4 +1,4 @@
-package com.example.tarefaclasses
+package com.example.tarefaparcelable
 
 import android.content.Intent
 import android.os.Build
@@ -12,7 +12,7 @@ import com.example.tarefa_5.Animais.Ave.Postura
 import com.example.tarefa_5.Animais.Bovi.Corte
 import com.example.tarefa_5.Animais.Bovi.Leite
 import com.example.tarefa_5.Animais.Peixe.Peixe
-import com.example.tarefaclasses.databinding.ActivityInfoBinding
+import com.example.tarefaparcelable.databinding.ActivityInfoBinding
 
 class InfoActivity : AppCompatActivity() {
     private lateinit var binding: ActivityInfoBinding

@@ -1,4 +1,4 @@
-package com.example.tarefaclasses.Recycleview
+package com.example.tarefaparcelable.Recycleview
 
 data class ResumoItem(
     val raca: String,

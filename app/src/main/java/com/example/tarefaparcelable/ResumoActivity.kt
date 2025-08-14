@@ -1,14 +1,14 @@
-package com.example.tarefaclasses
+package com.example.tarefaparcelable
 
 import android.os.Build
 import android.os.Bundle
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.tarefaparcelable.Recycleview.ResumoAdapter
+import com.example.tarefaparcelable.Recycleview.ResumoItem
 import com.example.tarefa_5.Animais.Animal
-import com.example.tarefaclasses.Recycleview.ResumoAdapter
-import com.example.tarefaclasses.Recycleview.ResumoItem
-import com.example.tarefaclasses.databinding.ActivityResumoBinding
+import com.example.tarefaparcelable.databinding.ActivityResumoBinding
 
 class ResumoActivity : AppCompatActivity() {
 

@@ -1,40 +1,49 @@
-package com.example.tarefaclasses
+package com.example.tarefaparcelable
 
 import android.content.Intent
 import android.os.Bundle
 import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
-import com.example.tarefa_5.Animais.Peixe.Peixe
-import com.example.tarefaclasses.databinding.ActivityPsiBinding
+import com.example.tarefa_5.Animais.Ave.AveCorte
+import com.example.tarefa_5.Animais.Ave.Postura
+import com.example.tarefaparcelable.databinding.ActivityAviBinding
 
-class PsiActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityPsiBinding
+class AviActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityAviBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityPsiBinding.inflate(layoutInflater)
+        binding = ActivityAviBinding.inflate(layoutInflater)
 
         setContentView(binding.root)
         val i = intent
 
         val apelido = i.getStringExtra("apelido").toString().trim()
-        val escolha = i.getStringExtra("psi").toString().trim()
+        val escolha = i.getStringExtra("avi").toString().trim()
         val lista = ArrayList<String>()
-        lista.add("Peixe")
-
+        lista.add("Corte")
+        lista.add("")
+        lista.add("Postura")
 
 
         binding.listViewItem.setOnItemClickListener{_, _, position, _ ->
             val item = lista[position]
-            if( item == "Peixe"){
+            if( item == "Corte"){
                 val j = Intent(this, InfoActivity::class.java)
-                val corte1 = Peixe(3,16.2, "Tambaqui", "Doce")
-                val corte2 = Peixe(9,17.5, "Robalo ", "Salgada")
+                val corte1 = AveCorte(3,12.2, "Cobb", 62)
+                val corte2 = AveCorte(12,11.5, "Hubbard", 58)
                 j.putExtra("animal1", corte1)
                 j.putExtra("animal2", corte2)
                 startActivity(j)
 
             }
-
+            if( item == "Postura"){
+                val j = Intent(this, InfoActivity::class.java)
+                val postura1 = Postura(4,7.5, "Isa Brown", 30)
+                val postura2 = Postura(10,9.3, "Dekalb White", 22)
+                j.putExtra("animal1", postura1)
+                j.putExtra("animal2", postura2)
+                startActivity(j)
+            }
 
         }
 

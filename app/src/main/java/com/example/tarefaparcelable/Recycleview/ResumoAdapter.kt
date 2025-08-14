@@ -1,11 +1,11 @@
-package com.example.tarefaclasses.Recycleview
+package com.example.tarefaparcelable.Recycleview
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.tarefaclasses.R
+import com.example.tarefaparcelable.R
 
 class ResumoAdapter(private val lista: List<ResumoItem>):
     RecyclerView.Adapter<ResumoAdapter.ResumoViewHolder>() {

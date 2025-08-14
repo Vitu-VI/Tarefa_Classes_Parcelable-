@@ -1,4 +1,4 @@
-package com.example.tarefaclasses
+package com.example.tarefaparcelable
 
 import android.content.Intent
 import android.os.Bundle

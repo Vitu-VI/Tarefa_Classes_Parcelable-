@@ -1,26 +1,29 @@
-package com.example.tarefaclasses
+package com.example.tarefaparcelable
 
-import android.R
+
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
-import com.example.tarefaclasses.databinding.ActivityTelaBinding
+import com.example.tarefaparcelable.databinding.ActivityTelaBinding
+
 
 class TelaActivity : AppCompatActivity() {
     private lateinit var binding: ActivityTelaBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityTelaBinding.inflate(layoutInflater)
-
         setContentView(binding.root)
+
         val j = intent
         val apelido = j.getStringExtra("apelido").toString().trim()
-        var primeiro = true
-        val spinner = listOf("Bovicultura", "Avicultura", "Pscicultura")
-        val adapter = ArrayAdapter(this, R.layout.simple_spinner_item, spinner)
+        var primeiro = true // Flag para evitar que o listener dispare no primeiro carregamento
+
+        val spinner = listOf("Bovicultura", "Avicultura", "Pscicultura", "Doenças")
+        val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, spinner)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         binding.spinnerOpcoes.adapter = adapter
 
@@ -28,10 +31,11 @@ class TelaActivity : AppCompatActivity() {
 
         binding.spinnerOpcoes.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
-                if (primeiro){
+                if (primeiro) {
                     primeiro = false
                     return
                 }
+
                 when (parent.getItemAtPosition(position) as String) {
                     "Bovicultura" -> {
                         val i = Intent(this@TelaActivity, BovinoculturaActivity::class.java)
@@ -49,26 +53,25 @@ class TelaActivity : AppCompatActivity() {
                     }
                     "Pscicultura" -> {
                         val i = Intent(this@TelaActivity, PsiActivity::class.java)
-                        val escolha = "Psicultura"
+                        val escolha = "Pscicultura"
                         i.putExtras(j)
                         i.putExtra("psi", escolha)
                         startActivity(i)
                     }
+                    "Doenças" -> {
+                        val i = Intent(this@TelaActivity, TipoDoencaActivity::class.java)
+                        startActivity(i)
+                    }
                 }
             }
+
             override fun onNothingSelected(parent: AdapterView<*>) {
 
             }
         }
+
         binding.buttonSair.setOnClickListener {
             finish()
         }
-
-
-
-
-
-
-
     }
 }
