@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
@@ -10,34 +11,42 @@
         android:layout_height="wrap_content"
         android:textStyle="bold"
         android:textSize="18sp"
-        android:text="ID: 1" />
+        tools:text="ID: 1" />
 
     <TextView
         android:id="@+id/tv_animal_nome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="16sp"
-        android:text="Animal: Cachorro" />
+        tools:text="Animal: Cachorro" />
 
     <TextView
         android:id="@+id/tv_animal_idade"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="16sp"
-        android:text="idade: 5"  />
+        tools:text="idade: 5"  />
 
     <TextView
         android:id="@+id/tv_symptoms"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="14sp"
-        android:text="Sintomas: Tosse, Febre" />
+        tools:text="Sintomas: Tosse, Febre" />
 
     <TextView
         android:id="@+id/tv_temperature_disease"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="14sp"
-        android:text="Temp: 39.2, Doença: Gripe" />
+        tools:text="Temp: 39.2, Doença: Gripe" />
+
+    <TextView
+        android:id="@+id/tv_date_symptoms"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        android:layout_marginTop="4dp"
+        tools:text="Data: 16-08-2025" />
 
 </LinearLayout>

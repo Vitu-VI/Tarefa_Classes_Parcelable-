@@ -5,25 +5,39 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#4CAF50"
+    android:background="#9502B12A"
     android:gravity="center"
     android:orientation="vertical"
     tools:context=".TelaActivity">
 
     <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="-----------------------------------------------------------------------------------------------------------"
+        android:textColor="@color/black"/>
+
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="214dp"
-
         android:gravity="center"
+        android:fontFamily="sans-serif-black"
         android:text="Opções de Pesquisa"
         android:textColor="@color/black"
-        android:textSize="60dp" />
+        android:textSize="60sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="30dp"
+        android:text="-----------------------------------------------------------------------------------------------------------"
+        android:textColor="@color/black"/>
 
     <TextView
         android:id="@+id/text_apelido"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/black"
+        android:fontFamily="serif"
         android:textSize="20sp" />
 
     <LinearLayout
@@ -32,12 +46,18 @@
         android:gravity="center"
         android:orientation="vertical">
 
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/boi_galinha_peixe"/>
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="30dp"
+            android:layout_marginVertical="30dp"
             android:text="Escolha uma das opções:"
             android:textColor="@color/black"
+            android:fontFamily="sans-serif-black"
             android:textSize="20sp" />
 
         <Spinner
@@ -47,6 +67,12 @@
 
 
     </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="-----------------------------------------------------------------------------------------------------------"
+        android:textColor="@color/black"/>
 
     <Button
         android:id="@+id/button_sair"

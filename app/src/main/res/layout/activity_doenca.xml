@@ -14,6 +14,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Teste"
+        android:textColor="@color/black"
         android:layout_marginTop="30dp"
         android:id="@+id/nome_text"/>
 
@@ -23,11 +24,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
-        android:text="Escreva o tipo de doença buscado:"/>
+        android:text="Informe até 3 sintomas observados:"/>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
+            android:layout_marginTop="20dp"
             android:gravity="center">
             <TextView
                 android:layout_width="wrap_content"
@@ -74,6 +76,49 @@
 
 
         </LinearLayout>
+    <ImageView
+        android:id="@+id/dateSelector"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:contentDescription="Select Date"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="20dp"/>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_start_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Data Inicial: Selecione"
+
+            android:padding="8dp"
+            android:background="?android:attr/selectableItemBackground" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="|"/>
+
+        <TextView
+            android:id="@+id/tv_end_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Data Final: Selecione"
+
+            android:padding="8dp"
+            android:background="?android:attr/selectableItemBackground" />
+
+    </LinearLayout>
+
+
 
 
 
@@ -82,7 +127,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="Consultar Dados" />
+        android:background="@color/black"
+        android:textColor="@color/white"
+        android:layout_marginBottom="10dp"
+        android:text="Procurar" />
+
+
+
+
 
     <TextView
         android:id="@+id/tv_status_message"

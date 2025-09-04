@@ -8,11 +8,7 @@
 
     tools:context=".LoginActivity">
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:src="@drawable/pastogado"
-        android:scaleType="fitStart"/>
+
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -38,18 +34,17 @@
             android:layout_height="wrap_content"
             android:fontFamily="serif"
             android:gravity="center"
-            android:text="Bem-Vindo"
+            android:text="Olá"
             android:textColor="@color/black"
-            android:layout_marginBottom="20dp"
             android:textSize="60sp" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Preencha o seu username e password para continuar:"
+            android:text="Preencha os campos abaixo para continuar"
             android:gravity="center"
             android:layout_marginBottom="50dp"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="30dp"
             android:textColor="@color/black"
             android:textSize="20sp"/>
         <LinearLayout
@@ -60,7 +55,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Username:"
+                android:text="Usuário:"
                 android:gravity="center"/>
 
             <EditText
@@ -101,7 +96,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Password:"
+                android:text="Senha:"
                 android:gravity="center"/>
 
             <EditText
@@ -112,15 +107,24 @@
                 android:id="@+id/edit_text2"/>
 
         </LinearLayout>
-
-        <Button
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="200dp"
-            android:background="@color/black"
-            android:textColor="@color/white"
-            android:id="@+id/button_entrar"
-            android:text="Entrar"/>
+            android:layout_marginTop="150dp"
+            android:layout_marginBottom="50dp"
+            android:gravity="center">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:background="@color/black"
+                android:textColor="@color/white"
+                android:id="@+id/button_entrar"
+                android:text="Entrar"/>
+        </LinearLayout>
+
+
 
 
     </LinearLayout>

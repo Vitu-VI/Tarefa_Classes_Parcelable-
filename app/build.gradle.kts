@@ -11,7 +11,7 @@ android {
 
     defaultConfig {
         applicationId = "com.example.tarefaparcelable"
-        minSdk = 21
+        minSdk = 24
         targetSdk = 35
         versionCode = 1
         versionName = "1.0"
@@ -54,5 +54,6 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.core)
     implementation(libs.kotlinx.serialization.json)
     implementation("com.squareup.okhttp3:okhttp:5.0.0")
+    implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")
 
 }

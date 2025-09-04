@@ -1,5 +1,7 @@
 package com.example.tarefaparcelable
 
+import android.app.DatePickerDialog
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.enableEdgeToEdge
@@ -14,7 +16,11 @@ import okhttp3.Request
 import org.json.JSONArray
 import org.json.JSONException
 import java.io.IOException
+import java.text.SimpleDateFormat
+import java.util.Calendar
+import java.util.Locale
 import java.util.concurrent.Executors
+import kotlin.jvm.java
 
 
 class DoencaActivity : AppCompatActivity() {
@@ -25,9 +31,10 @@ class DoencaActivity : AppCompatActivity() {
 
     private lateinit var animalDataAdapter: AnimalDataAdapter
     private val animalDataList = mutableListOf<AnimalData>()
-
-    // Variável para armazenar a escolha do animal recebida
     private var escolhaTipoAnimal: String? = null
+
+    private var startDate: Calendar? = null
+    private var endDate: Calendar? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         binding = ActivityDoencaBinding.inflate(layoutInflater)
@@ -35,7 +42,6 @@ class DoencaActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(binding.root)
 
-        // --- RECEBE O PARÂMETRO DA INTENT ---
         val extras = intent.extras
         if (extras != null) {
             for (key in extras.keySet()) {
@@ -46,34 +52,69 @@ class DoencaActivity : AppCompatActivity() {
             }
         }
         binding.nomeText.setText(escolhaTipoAnimal)
-        // --- Configuração do RecyclerView ---
+
         binding.recyclerViewAnimalData.layoutManager = LinearLayoutManager(this)
         animalDataAdapter = AnimalDataAdapter(animalDataList)
         binding.recyclerViewAnimalData.adapter = animalDataAdapter
 
-        // --- Configuração do Botão de Consulta ---
+        binding.tvStartDate.setOnClickListener {
+            showDatePicker(isStartDate = true)
+        }
+        binding.tvEndDate.setOnClickListener {
+            showDatePicker(isStartDate = false)
+        }
+
         binding.btnConsultar.setOnClickListener {
             if (escolhaTipoAnimal != null) {
                 consultarDadosAnimal()
             } else {
                 binding.tvStatusMessage.text = "Status: Nenhuma escolha de animal recebida."
             }
+
         }
+
+
+
     }
 
+    private fun showDatePicker(isStartDate: Boolean) {
+        val myCalendar = Calendar.getInstance()
+        val year = myCalendar.get(Calendar.YEAR)
+        val month = myCalendar.get(Calendar.MONTH)
+        val day = myCalendar.get(Calendar.DAY_OF_MONTH)
+
+        val datePicker = DatePickerDialog(
+            this,
+            { _, selectedYear, selectedMonth, selectedDayOfMonth ->
+                myCalendar.set(selectedYear, selectedMonth, selectedDayOfMonth)
+                val dateFormatDisplay = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault())
+                val formattedDate = dateFormatDisplay.format(myCalendar.time)
+
+                if (isStartDate) {
+                    startDate = myCalendar
+                    binding.tvStartDate.text = "Data Inicial: $formattedDate"
+                } else {
+                    endDate = myCalendar
+                    binding.tvEndDate.text = "Data Final: $formattedDate"
+                }
+            }, year, month, day
+        )
+        datePicker.show()
+    }
+
+    // ... dentro da sua classe DoencaActivity ...
     private fun consultarDadosAnimal() {
         val viewName = when (escolhaTipoAnimal) {
-            "Buffalo" -> "doencas_buffalo_view"
-            "Cow" -> "doencas_cow_view"
-            "Goat" -> "doencas_goat_view"
-            "Sheep" -> "doencas_sheep_view"
+            "Búfalos" -> "doencas_buffalo2_view"
+            "Vacas" -> "doencas_cow2_view"
+            "Cabras" -> "doencas_goat2_view"
+            "Ovelhas" -> "doencas_sheep2_view"
             else -> {
                 binding.tvStatusMessage.text = "Status: Escolha de animal inválida."
                 return
             }
         }
 
-        // --- Pegar os inputs e filtrar os vazios ---
         val inputs = listOf(
             binding.editDeonca1.text.toString(),
             binding.editDeonca2.text.toString(),
@@ -81,36 +122,43 @@ class DoencaActivity : AppCompatActivity() {
         ).filter { it.isNotBlank() }
 
         val symptomColumns = listOf("\"Symptom 1\"", "\"Symptom 2\"", "\"Symptom 3\"")
-        val andConditions = mutableListOf<String>()
-
-        // Para cada valor de entrada do usuário (sintoma A, B, C...)
-        if (inputs.isNotEmpty()) {
-            for (inputValue in inputs) {
-                val orForThisValue = mutableListOf<String>()
-                // Cria uma condição OR para cada coluna de sintoma
-                for (column in symptomColumns) {
-                    orForThisValue.add("$column.ilike.*$inputValue*")
-                }
-                // Agrupa todas as condições de OR do sintoma atual com parênteses
-                andConditions.add("or(${orForThisValue.joinToString(",")})")
-            }
-        }
 
         val httpUrlBuilder = HttpUrl.Builder()
             .scheme("http")
-            .host("172.29.255.147")
+            .host("192.168.1.107")
             .port(3000)
             .addPathSegment(viewName)
 
-        if (andConditions.isNotEmpty()) {
-            val finalAndFilter = andConditions.joinToString(",")
+        // Lógica para adicionar filtros de sintomas
+        if (inputs.isNotEmpty()) {
+            val orConditions = mutableListOf<String>()
+            for (inputValue in inputs) {
+                for (column in symptomColumns) {
+                    orConditions.add("$column.ilike.*$inputValue*")
+                }
+            }
+            val finalOrFilter = orConditions.joinToString(",")
+            httpUrlBuilder.addQueryParameter("or", "($finalOrFilter)")
+        }
 
-            httpUrlBuilder.addQueryParameter("and", "($finalAndFilter)")
+        // Lógica para adicionar filtros de data
+        val dateFormatQuery = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+
+        startDate?.let {
+            val formattedStartDate = dateFormatQuery.format(it.time)
+            // Adiciona a data como um parâmetro separado
+            httpUrlBuilder.addQueryParameter("date_symptoms", "gte.$formattedStartDate")
+        }
+
+        endDate?.let {
+            val formattedEndDate = dateFormatQuery.format(it.time)
+            // Adiciona a data como um parâmetro separado
+            httpUrlBuilder.addQueryParameter("date_symptoms", "lte.$formattedEndDate")
         }
 
         val url = httpUrlBuilder.build().toString()
 
-        Log.d("ConsultaApp", "URL de requisição: $url") // Para depuração
+        Log.d("ConsultaApp", "URL de requisição: $url")
 
         val request = Request.Builder()
             .url(url)
@@ -144,9 +192,11 @@ class DoencaActivity : AppCompatActivity() {
                             val symptom3 = jsonObj.optString("Symptom 3", null)
                             val temperature = if (jsonObj.has("Temperature")) jsonObj.optDouble("Temperature").toFloat() else null
                             val disease = jsonObj.optString("Disease", null)
+                            val dateSymptoms = jsonObj.optString("date_symptoms", null)
+
 
                             receivedAnimalData.add(
-                                AnimalData(id, animalNome, animalIdade, symptom1, symptom2, symptom3, temperature, disease)
+                                AnimalData(id, animalNome, animalIdade, symptom1, symptom2, symptom3, temperature, disease, dateSymptoms)
                             )
                         } catch (e: JSONException) {
                             Log.e("ConsultaApp", "Erro ao parsear objeto JSON: ${e.message} - Objeto: $jsonObj", e)
@@ -156,7 +206,7 @@ class DoencaActivity : AppCompatActivity() {
                     runOnUiThread {
                         animalDataList.addAll(receivedAnimalData)
                         animalDataAdapter.notifyDataSetChanged()
-                        binding.tvStatusMessage.text = "Status: ${animalDataList.size} dados carregados para $escolhaTipoAnimal."
+                        binding.tvStatusMessage.text = "Status: ${animalDataList.size} $escolhaTipoAnimal encontrados(as)."
                     }
                 } else {
                     runOnUiThread {
@@ -178,8 +228,10 @@ class DoencaActivity : AppCompatActivity() {
         }
     }
 
+
     override fun onDestroy() {
         super.onDestroy()
         executorService.shutdown()
     }
+
 }

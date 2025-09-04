@@ -22,7 +22,7 @@ class TelaActivity : AppCompatActivity() {
         val apelido = j.getStringExtra("apelido").toString().trim()
         var primeiro = true // Flag para evitar que o listener dispare no primeiro carregamento
 
-        val spinner = listOf("Bovicultura", "Avicultura", "Pscicultura", "Doenças")
+        val spinner = listOf("Bovinocultura", "Avicultura", "Piscicultura", "Doenças")
         val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, spinner)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         binding.spinnerOpcoes.adapter = adapter
@@ -37,9 +37,9 @@ class TelaActivity : AppCompatActivity() {
                 }
 
                 when (parent.getItemAtPosition(position) as String) {
-                    "Bovicultura" -> {
+                    "Bovinocultura" -> {
                         val i = Intent(this@TelaActivity, BovinoculturaActivity::class.java)
-                        val escolha = "Bovicultura"
+                        val escolha = "Bovinocultura"
                         i.putExtras(j)
                         i.putExtra("bovi", escolha)
                         startActivity(i)
@@ -51,9 +51,9 @@ class TelaActivity : AppCompatActivity() {
                         i.putExtra("avi", escolha)
                         startActivity(i)
                     }
-                    "Pscicultura" -> {
+                    "Piscicultura" -> {
                         val i = Intent(this@TelaActivity, PsiActivity::class.java)
-                        val escolha = "Pscicultura"
+                        val escolha = "Piscicultura"
                         i.putExtras(j)
                         i.putExtra("psi", escolha)
                         startActivity(i)
@@ -62,7 +62,9 @@ class TelaActivity : AppCompatActivity() {
                         val i = Intent(this@TelaActivity, TipoDoencaActivity::class.java)
                         startActivity(i)
                     }
+
                 }
+
             }
 
             override fun onNothingSelected(parent: AdapterView<*>) {
@@ -73,5 +75,6 @@ class TelaActivity : AppCompatActivity() {
         binding.buttonSair.setOnClickListener {
             finish()
         }
+
     }
 }

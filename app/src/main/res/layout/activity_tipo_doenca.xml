@@ -6,19 +6,114 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
+    android:background="#3FE16AFF"
     android:orientation="vertical"
     tools:context=".TipoDoencaActivity">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/black"
-        android:text="Escolha uma das opções:"
-        android:textSize="20sp"
-        android:layout_marginBottom="30dp"/>
-    <Spinner
+        android:layout_marginVertical="40dp"
+        android:text="-----------------------------------------------------------------------------------------------------------"/>
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/spinner_opcoes"/>
+        android:text="Doenças"
+        android:fontFamily="sans-serif-smallcaps"
+        android:layout_marginBottom="20dp"
+        android:textColor="@color/black"
+        android:textSize="70dp" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="-----------------------------------------------------------------------------------------------------------"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Escolha um dos tipos a baixo:"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:fontFamily="sans-serif-condensed-light"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="-----------------------------------------------------------------------------------------------------------"/>
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp"
+        android:gravity="center">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:fontFamily="sans-serif-black"
+            android:text="   Sintomas :"
+            android:textColor="@color/black"
+            android:textSize="20sp" />
+
+        <Spinner
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/spinner_opcoes1"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginVertical="20dp"
+
+        android:gravity="center">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:fontFamily="sans-serif-black"
+            android:text="Gráfico:"
+            android:textColor="@color/black"
+            android:textSize="20sp" />
+
+        <Spinner
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/spinner_opcoes2"
+            />
+
+    </LinearLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="0dp"
+        android:text="-----------------------------------------------------------------------------------------------------------"/>
+
+
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:background="@color/black"
+        android:textColor="@color/white"
+        android:id="@+id/btn_voltar"
+        android:text="Voltar"/>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/boi_galinha_peixe"
+        android:scaleType="fitStart"/>
+
+
 
 </LinearLayout>

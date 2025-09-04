@@ -17,6 +17,9 @@
         android:theme="@style/Theme.TarefaClasses"
         tools:targetApi="31">
         <activity
+            android:name=".GrafActivity"
+            android:exported="false" />
+        <activity
             android:name=".TipoDoencaActivity"
             android:exported="false" />
         <activity

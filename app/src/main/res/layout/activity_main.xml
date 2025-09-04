@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ff0"
+    android:background="#000000"
     tools:context=".MainActivity">
 
     <ImageView
@@ -23,8 +23,9 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Estudos das Culturas de Animais"
+            android:text="Meus Rebanhos"
             android:textSize="40sp"
+            android:textColor="#ff0"
             android:layout_marginBottom="50dp"
             android:gravity="center"
             android:fontFamily="serif"/>
@@ -32,7 +33,8 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Loanding..."
+            android:text="Carregando..."
+            android:textColor="#ff0"
             android:textSize="20sp"
             android:layout_marginTop="200dp"
             android:gravity="center"/>
