@@ -1,14 +1,9 @@
 package com.example.tarefaparcelable
 
-
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
 import com.example.tarefaparcelable.databinding.ActivityTelaBinding
-
 
 class TelaActivity : AppCompatActivity() {
     private lateinit var binding: ActivityTelaBinding
@@ -18,63 +13,52 @@ class TelaActivity : AppCompatActivity() {
         binding = ActivityTelaBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        // Recebe os dados da Intent anterior (como o apelido)
         val j = intent
-        val apelido = j.getStringExtra("apelido").toString().trim()
-        var primeiro = true // Flag para evitar que o listener dispare no primeiro carregamento
+        val apelido = j.getStringExtra("apelido")?.trim() ?: "Usuário"
 
-        val spinner = listOf("Bovinocultura", "Avicultura", "Piscicultura", "Doenças")
-        val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, spinner)
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        binding.spinnerOpcoes.adapter = adapter
+        // Define a mensagem de boas-vindas
+        binding.textApelido.text = "Bem Vindo(a) $apelido"
 
-        binding.textApelido.setText("Bem Vindo(a) $apelido")
+        // Configura os cliques para cada cartão
+        setupCardClickListeners()
 
-        binding.spinnerOpcoes.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
-                if (primeiro) {
-                    primeiro = false
-                    return
-                }
 
-                when (parent.getItemAtPosition(position) as String) {
-                    "Bovinocultura" -> {
-                        val i = Intent(this@TelaActivity, BovinoculturaActivity::class.java)
-                        val escolha = "Bovinocultura"
-                        i.putExtras(j)
-                        i.putExtra("bovi", escolha)
-                        startActivity(i)
-                    }
-                    "Avicultura" -> {
-                        val i = Intent(this@TelaActivity, AviActivity::class.java)
-                        val escolha = "Avicultura"
-                        i.putExtras(j)
-                        i.putExtra("avi", escolha)
-                        startActivity(i)
-                    }
-                    "Piscicultura" -> {
-                        val i = Intent(this@TelaActivity, PsiActivity::class.java)
-                        val escolha = "Piscicultura"
-                        i.putExtras(j)
-                        i.putExtra("psi", escolha)
-                        startActivity(i)
-                    }
-                    "Doenças" -> {
-                        val i = Intent(this@TelaActivity, TipoDoencaActivity::class.java)
-                        startActivity(i)
-                    }
+    }
 
-                }
+    private fun setupCardClickListeners() {
+        val originalIntentExtras = intent.extras
 
+        binding.cardBovinocultura.setOnClickListener {
+            val intent = Intent(this, BovinoculturaActivity::class.java)
+            if (originalIntentExtras != null) {
+                intent.putExtras(originalIntentExtras)
             }
-
-            override fun onNothingSelected(parent: AdapterView<*>) {
-
-            }
+            intent.putExtra("bovi", "Bovinocultura")
+            startActivity(intent)
         }
 
-        binding.buttonSair.setOnClickListener {
-            finish()
+        binding.cardAvicultura.setOnClickListener {
+            val intent = Intent(this, AviActivity::class.java)
+            if (originalIntentExtras != null) {
+                intent.putExtras(originalIntentExtras)
+            }
+            intent.putExtra("avi", "Avicultura")
+            startActivity(intent)
         }
 
+        binding.cardPiscicultura.setOnClickListener {
+            val intent = Intent(this, PsiActivity::class.java)
+            if (originalIntentExtras != null) {
+                intent.putExtras(originalIntentExtras)
+            }
+            intent.putExtra("psi", "Piscicultura")
+            startActivity(intent)
+        }
+
+        binding.cardDoencas.setOnClickListener {
+            val intent = Intent(this, TipoDoencaActivity::class.java)
+            startActivity(intent)
+        }
     }
 }

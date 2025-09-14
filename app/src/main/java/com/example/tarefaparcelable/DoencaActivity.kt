@@ -125,7 +125,7 @@ class DoencaActivity : AppCompatActivity() {
 
         val httpUrlBuilder = HttpUrl.Builder()
             .scheme("http")
-            .host("192.168.1.107")
+            .host("10.128.76.251")
             .port(3000)
             .addPathSegment(viewName)
 

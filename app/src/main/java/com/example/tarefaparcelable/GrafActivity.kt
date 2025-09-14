@@ -60,7 +60,7 @@ class GrafActivity : AppCompatActivity() {
         val animalNomeEmIngles = translateToEnglishForQuery(animal)
         val viewName = "doencas_porcentagem_${animalNomeEmIngles}_view"
 
-        val url = "http://192.168.1.107:3000/$viewName"
+        val url = "http://10.128.76.251:3000/$viewName"
         Log.d("GraficoApp", "URL de requisição: $url")
 
         val request = Request.Builder()
